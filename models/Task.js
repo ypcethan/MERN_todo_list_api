@@ -9,6 +9,11 @@ const taskSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    require: true,
+  },
 });
 
 module.exports = mongoose.model("Task", taskSchema);

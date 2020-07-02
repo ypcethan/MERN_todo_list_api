@@ -26,7 +26,7 @@ userSchema.pre("save", async function () {
 });
 
 userSchema.methods.getJWTToken = function () {
-  const payload = { useId: this._id };
+  const payload = { userId: this._id };
   const token = jwt.sign(payload, process.env.JWT_SECRECT);
   return token;
 };
