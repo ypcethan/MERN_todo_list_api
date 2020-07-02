@@ -1,36 +1,32 @@
-const express = require('express')
-const dotenv = require('dotenv')
-const morgan = require('morgan')
-const connectDB = require('./db')
-const userRouter = require('./routes/user')
+const express = require("express");
+const dotenv = require("dotenv");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const connectDB = require("./db");
+const userRouter = require("./routes/user");
+const taskRouter = require("./routes/task");
+const app = express();
 
-
-const app = express()
-
-
-if (process.env.NODE_ENV === 'development') {
-    dotenv.config({ path: "./config/dev.env" })
-    app.use(morgan('dev'))
+if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
+  dotenv.config({ path: "./config/dev.env" });
+  app.use(morgan("dev"));
 }
 
 // Middleware
-app.use(express.json())
+app.use(express.json());
+// enable req.cookies
+app.use(cookieParser());
 // Mounting routers
-app.use('/api/users', userRouter)
+app.use("/api/users", userRouter);
+app.use("/api/tasks", taskRouter);
 
-app.get('/', (req, res, next) => {
-    res.json('Hello')
-})
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
+
 const start = async () => {
-    await connectDB()
-    app.listen(PORT, () => {
-        console.log(`Server listening on port ${PORT}`)
-    })
-}
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
+};
 
-
-module.exports = { app, start }
-
-
-
+module.exports = { app, start };
