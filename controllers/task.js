@@ -28,7 +28,6 @@ exports.updateTask = async (req, res, next) => {
   const id = req.params.id;
   let task = await Task.findById(id);
 
-  // console.log(task);
   if (!task) {
     return res.status(400).json({
       success: false,
@@ -50,7 +49,7 @@ exports.updateTask = async (req, res, next) => {
       msg: "A task requires content",
     });
   }
-  task = await Task.findOneAndUpdate(id, req.body, {
+  task = await Task.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });

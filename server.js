@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./db");
 const userRouter = require("./routes/user");
@@ -16,6 +17,7 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
 app.use(express.json());
 // enable req.cookies
 app.use(cookieParser());
+app.use(cors());
 // Mounting routers
 app.use("/api/users", userRouter);
 app.use("/api/tasks", taskRouter);

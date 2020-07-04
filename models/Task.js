@@ -14,6 +14,10 @@ const taskSchema = mongoose.Schema({
     ref: "User",
     require: true,
   },
+  dueDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Task", taskSchema);
