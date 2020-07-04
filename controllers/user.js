@@ -62,6 +62,6 @@ const sendTokenResponse = (user, statusCode, res, useCookie = false) => {
   res.status(statusCode).json({
     success: true,
     token,
-    user,
+    user: { ...user, password: "" },
   });
 };
