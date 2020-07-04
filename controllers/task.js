@@ -62,8 +62,9 @@ exports.updateTask = async (req, res, next) => {
 
 exports.deleteTask = async (req, res, next) => {
   const id = req.params.id;
-  let task = Task.findById(id);
+  let task = await Task.findById(id);
 
+  console.log(task);
   if (!task) {
     return res.status(400).json({
       success: false,
