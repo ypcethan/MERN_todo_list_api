@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const path = require("path");
 const morgan = require("morgan");
 const cors = require("cors");
 const mongoSanitize = require("express-mongo-sanitize");
@@ -14,7 +15,10 @@ const taskRouter = require("./routes/task");
 const app = express();
 
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-  dotenv.config({ path: "./config/dev.env" });
+  dotenv.config({ path: path.resolve(__dirname, "config/dev.env") });
+  console.log("Inserver");
+  console.log(process.env.PORT);
+  console.log(process.env.MONGO_URI);
   app.use(morgan("dev"));
 }
 
