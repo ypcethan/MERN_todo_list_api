@@ -16,9 +16,6 @@ const app = express();
 
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
   dotenv.config({ path: path.resolve(__dirname, "config/dev.env") });
-  console.log("Inserver");
-  console.log(process.env.PORT);
-  console.log(process.env.MONGO_URI);
   app.use(morgan("dev"));
 }
 

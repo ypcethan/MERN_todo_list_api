@@ -38,7 +38,6 @@ describe("Create task", () => {
       .set("Authorization", `Bearer ${token}`)
       .send(taskOneData)
       .expect(200);
-    // console.log(response.body);
   });
 });
 

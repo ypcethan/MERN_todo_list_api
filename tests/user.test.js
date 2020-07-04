@@ -33,7 +33,6 @@ describe("Register user", () => {
       .post(baseUrl + "/register")
       .send(userOneData)
       .expect(400);
-    // console.log(response.body);
   });
 });
 
@@ -47,7 +46,6 @@ describe("Login user", () => {
       .post(baseUrl + "/login")
       .send({ email, password })
       .expect(200);
-    // console.log(response.body);
   });
 
   test("Error if missing either email or password", async () => {
