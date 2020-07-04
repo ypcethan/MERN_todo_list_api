@@ -19,6 +19,9 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
   app.use(morgan("dev"));
 }
 
+if (process.env.NODE_ENV === "production") {
+  dotenv.config({ path: path.resolve(__dirname, "config/prod.env") });
+}
 // Middleware
 app.use(express.json());
 // enable req.cookies
