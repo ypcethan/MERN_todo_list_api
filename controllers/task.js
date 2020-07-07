@@ -1,6 +1,28 @@
+const moment = require("moment");
 const Task = require("../models/Task");
 exports.getTasks = async (req, res, next) => {
   const tasks = await Task.find({ user: req.user._id });
+  res.status(200).json({
+    success: true,
+    tasks: tasks,
+  });
+};
+
+exports.getCompletedTasks = async (req, res, next) => {
+  const unit = req.params.unit;
+  const amount = req.params.amount;
+  let tasks;
+
+  if (amount) {
+    const dateFrom = moment().subtract(amount, unit);
+    tasks = await Task.find({
+      user: req.user._id,
+      completed: true,
+      completedDate: { $gte: dateFrom },
+    });
+  } else {
+    tasks = await Task.find({ user: req.user._id });
+  }
   res.status(200).json({
     success: true,
     tasks: tasks,

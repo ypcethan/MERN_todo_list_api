@@ -17,9 +17,7 @@ const app = express();
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
   dotenv.config({ path: path.resolve(__dirname, "config/dev.env") });
   app.use(morgan("dev"));
-}
-
-if (process.env.NODE_ENV === "production") {
+} else {
   dotenv.config({ path: path.resolve(__dirname, "./prod.env") });
 }
 // Middleware
