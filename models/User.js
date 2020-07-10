@@ -37,4 +37,9 @@ userSchema.methods.comparePassword = async function (password) {
   const isMatch = await bcrypt.compare(password, this.password);
   return isMatch;
 };
+// Delete all tasks belong to the user that is being deleted
+userSchema.pre("remove", async function () {
+  await this.model("Task").deleteMany({ user: this._id });
+  next();
+});
 module.exports = mongoose.model("User", userSchema);
